@@ -4,10 +4,20 @@ version = "0.1.0"
 description = "Collection of small utility-functions"
 authors = ["Alex <aleosd@gmail.com>"]
 license = "Apache-2.0"
+homepage = "https://github.com/aleosd/nanos"
+repository = "https://github.com/aleosd/nanos"
+documentation = "https://github.com/aleosd/nanos"
 readme = "README.md"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
