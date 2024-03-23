@@ -2,7 +2,7 @@ from unittest import mock
 
 import pytest
 
-from nanos.data import idfy
+import nanos
 
 DUMMY_OBJ = mock.Mock()
 DUMMY_OBJ.id = 42
@@ -19,4 +19,4 @@ DUMMY_OBJ.id = 42
     ],
 )
 def test_idfy(data, expected_idfy):
-    assert idfy(data) == expected_idfy
+    assert nanos.data.idfy(data) == expected_idfy
