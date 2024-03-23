@@ -1,6 +1,9 @@
 name: Verify the library
 
-on: [push]
+on:
+  push:
+    paths:
+      - "**.py"
 
 jobs:
   build:
@@ -38,7 +41,7 @@ jobs:
         run: |
           python -m ensurepip
           python -m pip install --upgrade pip
-          python -m pip install --user poetry==${{ matrix.poetry-version }}
+          python -m pip install poetry==${{ matrix.poetry-version }}
 
       - name: Set Poetry config
         run: |
