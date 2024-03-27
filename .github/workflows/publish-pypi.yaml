@@ -32,7 +32,7 @@ jobs:
         run: |
           python -m ensurepip
           python -m pip install --upgrade pip
-          python -m pip install poetry==${{ env.POETRY_VERSION }}
+          python -m pip install --user poetry==${{ env.POETRY_VERSION }}
 
       - name: Set Poetry config
         run: |
