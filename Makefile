@@ -13,6 +13,7 @@ fmt:  # sort imports and format the projects' source
 verify:  # lint (check) the project
 	ruff format --check $(ALL_CODE)
 	ruff check $(SRC_DIR)
+	mypy ./nanos --strict
 
 .PHONY: test
 test: # run tests with pytest
