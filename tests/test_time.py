@@ -20,15 +20,23 @@ class TestTimer:
         assert_that(repr(timer), equal_to(expected_repr))
 
     @pytest.mark.parametrize(
-        "precision, expected_verbose",
+        "start, end, precision, expected_verbose",
         [
-            (3, "0:14:24.198"),
-            (2, "0:14:24.20"),
-            (1, "0:14:24.2"),
+            (123.456789, 987.654321, 3, "0:14:24.198"),
+            (123.456789, 987.654321, 2, "0:14:24.20"),
+            (123.456789, 987.654321, 1, "0:14:24.2"),
+            (123.000001, 124.000000, 3, "0:00:01.000"),
+            (123.000000, 124.000001, 3, "0:00:01.000"),
+            (123.001001, 124.000000, 3, "0:00:00.999"),
+            (1.0, 2.002, 3, "0:00:01.002"),
+            (1.0, 2.002, 2, "0:00:01.00"),
+            (1.0, 2.2, 2, "0:00:01.20"),
         ],
     )
-    def test__verbose(self, timer: Timer, precision, expected_verbose) -> None:
-        timer.precision = precision
+    def test__verbose(self, start, end, precision, expected_verbose) -> None:
+        timer = Timer(precision=precision)
+        timer.start = start
+        timer.end = end
         assert_that(timer.verbose(), equal_to(expected_verbose))
 
     @pytest.mark.parametrize(

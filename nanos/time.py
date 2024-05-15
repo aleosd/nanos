@@ -28,9 +28,17 @@ class Timer:
         return f"<Timer [start={self.start}, end={self.end}]>"
 
     def verbose(self) -> str:
-        ms, seconds = math.modf(self.elapsed)
-        ms_part = round(ms, self.precision) * 10**self.precision
-        return f"{datetime.timedelta(seconds=seconds)}.{int(ms_part)}"
+        fraction_seconds, whole_seconds = math.modf(self.elapsed)
+        rounded_fraction = round(fraction_seconds, self.precision)
+        if rounded_fraction >= 1:
+            whole_seconds += 1
+            formatted_fraction = "0" * self.precision
+        elif fraction_seconds == 0:
+            formatted_fraction = "0" * self.precision
+        else:
+            fraction = int(rounded_fraction * 10**self.precision)
+            formatted_fraction = str(fraction).zfill(self.precision)
+        return f"{datetime.timedelta(seconds=whole_seconds)}.{formatted_fraction}"
 
     @property
     def elapsed(self) -> float:

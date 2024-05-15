@@ -17,7 +17,7 @@ verify:  # lint (check) the project
 
 .PHONY: test
 test: # run tests with pytest
-	coverage run -m pytest $(TESTS_DIR) --showlocals
+	coverage run -m pytest $(TESTS_DIR) --showlocals -s
 	coverage report -m
 
 .PHONY: help
