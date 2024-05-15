@@ -9,6 +9,11 @@ DUMMY_OBJ = mock.Mock()
 DUMMY_OBJ.id = 42
 
 
+def dummy_generator():
+    for number in range(1, 3):
+        yield {"id": number, "field": str(number)}
+
+
 @pytest.mark.parametrize(
     "data,expected_idfy",
     [
@@ -17,6 +22,7 @@ DUMMY_OBJ.id = 42
         ([], {}),
         ([{"id": "a"}, {"id": "b"}], {"a": {"id": "a"}, "b": {"id": "b"}}),
         (DUMMY_OBJ, {42: DUMMY_OBJ}),
+        (dummy_generator(), {1: {"id": 1, "field": "1"}, 2: {"id": 2, "field": "2"}}),
     ],
 )
 def test_idfy(data, expected_idfy):
