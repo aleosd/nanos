@@ -1,8 +1,12 @@
 default: help
 
 SRC_DIR := ./nanos
+DOCS_DIR := ./docs
 TESTS_DIR := ./tests
-ALL_CODE := $(SRC_DIR) $(TESTS_DIR)
+DOCS_SRC := $(DOCS_DIR)/source
+DOCS_BUILD := $(DOCS_DIR)/build
+
+ALL_CODE := $(SRC_DIR) $(TESTS_DIR) $(DOCS_SRC)/conf.py
 
 .PHONY: fmt
 fmt:  # sort imports and format the projects' source
@@ -19,6 +23,13 @@ verify:  # lint (check) the project
 test: # run tests with pytest
 	coverage run -m pytest $(TESTS_DIR) --showlocals -s
 	coverage report -m
+
+.PHONY: build-docs
+build-docs: # build the documentation using sphinx
+	@rm -rf $(DOCS_BUILD)
+	sphinx-apidoc -f -o $(DOCS_SRC)/generated $(SRC_DIR) --separate --no-toc \
+		--remove-old --force --templatedir $(DOCS_SRC)/templates
+	sphinx-build -M html $(DOCS_SRC) $(DOCS_BUILD)
 
 .PHONY: help
 help: # Show help for each of the Makefile recipes.

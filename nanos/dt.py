@@ -4,6 +4,24 @@ import datetime
 def days_after_now(
     days_num: int = 1, tz: datetime.tzinfo | None = datetime.timezone.utc
 ) -> datetime.datetime:
+    """
+    Returns a datetime object representing the date that is `days_num` days after now.
+
+    By default, `days_num` is 1, so the function will return tomorrow's date by default.
+    The timezone is set to `datetime.timezone.utc` by default.
+
+    Parameters
+    ----------
+    days_num : int, optional
+        The number of days after now. Defaults to 1.
+    tz : datetime.tzinfo, optional
+        The timezone to use. Defaults to :class:`datetime.timezone.utc`.
+
+    Returns
+    -------
+    datetime.datetime
+        The date that is `days_num` days after now.
+    """
     return datetime.datetime.now(tz=tz) + datetime.timedelta(days=days_num)
 
 
