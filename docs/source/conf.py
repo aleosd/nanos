@@ -18,6 +18,7 @@ extensions = [
     "sphinx.ext.duration",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
+    "sphinx.ext.intersphinx",
 ]
 
 templates_path = ["_templates"]
@@ -32,3 +33,7 @@ html_static_path = ["_static"]
 
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
+
+intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
+html_logo = "_static/nanos_logo.png"
+html_favicon = "_static/favicon.ico"

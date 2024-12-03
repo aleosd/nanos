@@ -4,32 +4,47 @@ from functools import partial
 
 T = t.TypeVar("T")
 K = t.TypeVar("K")
+
 DEFAULT_ID_ATTR_NAME: t.Final = "id"
+
+#: List of values that are considered empty
 EMPTY_VALUES: t.Final[list[t.Any]] = ["", None, [], {}]
 
 
 def chunker(seq: Sequence[T], size: int) -> list[Sequence[T]]:
-    """Splits provided iterable into list of chunks of given size"""
+    """Splits provided iterable into list of chunks of given size
+
+    Args:
+        seq: iterable to split
+        size: chunk size
+
+    Returns:
+        list of chunks
+    """
     return [seq[pos : pos + size] for pos in range(0, len(seq), size)]
 
 
 def idfy(
     obj: T | Iterable[T] | dict[t.Any, t.Any], id_field_name: str = DEFAULT_ID_ATTR_NAME
 ) -> dict[t.Any, T | dict[t.Any, t.Any]]:
-    """Converts given object into dict with <id_field_name> values as a key
+    """Converts given object into dict with ``id_field_name`` values as a key
     and actual object as a value.
 
     If given object is a dict this function uses to get value of
-    <id_field_name> key. If any other object - looks for <id_field_name>
+    ``id_field_name`` key. If any other object - looks for ``id_field_name``
     attribute.
 
-    Raises ValueError if there's no appropriate id value found.
+    Raises :py:exc:`ValueError` if there's no appropriate id value found.
 
-    Applied recursively if Iterable is given as an input.
+    Applied recursively if :py:class:`Iterable` is given as an input.
 
     Args:
-        obj: object to convert to dictionary
-        id_field_name: name of the field/attribute to use to get
+        obj (T): object to convert to dictionary
+        id_field_name (str): name of the field/attribute to use to get, defaults
+            to `"id"`
+
+    Returns:
+        dict with ``id_field_name`` values as a key and actual object as a value
     """
     if isinstance(obj, dict):
         try:
@@ -44,6 +59,21 @@ def idfy(
 
 
 def remove_empty_members(obj: T, empty: list[t.Any] | None = None) -> T | None:
+    """
+    Removes empty members from given object.
+
+    Recursively goes through the given object and removes its members that are
+    considered empty. If given object is a dict, removes keys that have empty
+    values. If given object is a list removes empty items from it.
+
+    Args:
+        obj: object to remove empty members from
+        empty: list of values that are considered empty. If not given, defaults to
+            :const:`EMPTY_VALUES`
+
+    Returns:
+        object with empty members removed, or None if the object itself is empty
+    """
     empty = empty or EMPTY_VALUES
     cleaners: dict[type, t.Callable[[t.Any, list[t.Any]], t.Any]]
     cleaners = {
