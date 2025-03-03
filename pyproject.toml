@@ -6,7 +6,7 @@ authors = ["Alex <aleosd@gmail.com>"]
 license = "Apache-2.0"
 homepage = "https://github.com/aleosd/nanos"
 repository = "https://github.com/aleosd/nanos"
-documentation = "https://github.com/aleosd/nanos"
+documentation = "https://nanos.readthedocs.io/en/stable/index.html"
 readme = "README.md"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
