@@ -98,8 +98,7 @@ def remove_empty_members(obj: T, empty: list[t.Any] | None = None) -> T | None: 
 
 
 def remove_empty_members(obj: T, empty: list[t.Any] | None = None) -> T | None:
-    """
-    Removes empty members from given object.
+    """Removes empty members from given object.
 
     Recursively goes through the given object and removes its members that are
     considered empty. If given object is a dict, removes keys that have empty
