@@ -46,10 +46,12 @@ def set_level_for_logger(
     if isinstance(logger_names, str):
         logging.getLogger(logger_names).setLevel(level)
     elif isinstance(logger_names, (tuple, list)):
-        set_level_for_logger(logger_names, level)
-    raise TypeError(
-        f"Expected logger_names to be str, tuple or list, got {type(logger_names)} instead"
-    )
+        for logger_name in logger_names:
+            logging.getLogger(logger_name).setLevel(level)
+    else:
+        raise TypeError(
+            f"Expected logger_names to be str, tuple or list, got {type(logger_names)} instead"
+        )
 
 
 def get_simple_logger(
