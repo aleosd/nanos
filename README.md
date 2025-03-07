@@ -28,11 +28,15 @@ pip install nanos
 For complete list of utilities, please refer to documentation:
 https://nanos.readthedocs.io/en/latest/index.html
 
+### Formatting
+
 ```python
 from nanos import fmt
 
 print(fmt.size(1024))  # Output: 1.00 KB
 ```
+
+### Timing
 
 ```python
 import time
@@ -42,6 +46,23 @@ with ntime.Timer() as t:
     time.sleep(2)
 
 print(t.verbose())  # Output: 0:00:02.00
+```
+
+### Logging
+
+```python
+from nanos.logging import get_simple_logger, LoggerMixin
+
+# Quick setup for scripts
+logger = get_simple_logger(name="my_app", log_file="app.log")
+logger.info("Application started")
+
+# Use the mixin in your classes
+class MyService(LoggerMixin):
+    def process(self):
+        self.logger.debug("Processing started")
+        # Your code here
+        self.logger.info("Processing completed")
 ```
 
 ## License
