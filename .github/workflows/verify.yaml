@@ -1,13 +1,13 @@
 name: Verify the library
 
 on:
-  push:
-    paths:
-      - "**.py"
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
-
+    name: Verify project
     runs-on: ubuntu-latest
     strategy:
       matrix:
