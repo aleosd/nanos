@@ -5,6 +5,7 @@ Package structure
    :maxdepth: 4
 
    nanos.data
+   nanos.debug
    nanos.dt
    nanos.fmt
    nanos.logging
